@@ -1,5 +1,9 @@
 'use strict';
 
+const
+    js0 = require('js0')
+;
+
 class abDate_Class
 {
 
@@ -42,11 +46,31 @@ class abDate_Class
         return moment.utc(str, format).toDate().getTime() / 1000;
     }
 
+    getDate(year, month, day)
+    {
+        return new Date(Date.UTC(year, month, day));
+    }
+
     getDayOfWeek(time)
     {
         let date = new Date(time * 1000);
 
         return date.getUTCDay();
+    }
+
+    getTime(date = new Date())
+    {
+        js0.args(arguments, [ Date, js0.Default ]);
+
+        return Math.floor(date.getTime() / 1000);
+    }
+
+    getTime_Day(date = new Date())
+    {
+        let time = this.getTime(date);
+        time  = Math.floor(time / this.span_Day) * this.span_Day;
+
+        return time;
     }
 
     strToTime_Date(str)
