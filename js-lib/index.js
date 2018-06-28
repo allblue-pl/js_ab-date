@@ -13,16 +13,16 @@ class abDate_Class
         this.span_Hour = 60 * 60;
         this.span_Day = 24 * 60 * 60;
 
-        this.date_Format = 'd.m.Y';
-        this.dateTime_Format = 'd.m.Y H:i';
-        this.time_Format = 'H:i';
+        this.formats_Date = 'd.m.Y';
+        this.formats_DateTime = 'd.m.Y H:i';
+        this.formats_Time = 'H:i';
 
         this.utcOffset = 0;
     }
 
     format_Date(time, format = null)
     {
-        format = typeof format === null ? this.date_Format : format;
+        format = format === null ? this.formats_Date : format;
 
         return moment.utc(time * 1000).utcOffset(this.utcOffset)
                 .format(format);
@@ -30,7 +30,7 @@ class abDate_Class
 
     format_Datetime(time, format = null)
     {
-        format = typeof format === null ? this.dateTime_Format : format;
+        format = format === null ? this.formats_DateTime : format;
 
         return moment.utc(time * 1000).utcOffset(this.utcOffset).format(format);
     }
@@ -40,7 +40,7 @@ class abDate_Class
         if (str === '')
             return null;
 
-        format = typeof format === null ? this.time_Format : format;
+        format = format === null ? this.formats_Time : format;
 
         /* UTC because we are interested only in day. */
         return moment.utc(str, format).toDate().getTime() / 1000;
@@ -79,7 +79,7 @@ class abDate_Class
             return null;
 
         /* UTC because we are interested only in day. */
-        return moment.utc(str, this.date_Format)
+        return moment.utc(str, this.formats_Date)
                 .toDate().getTime() / 1000;
     }
 
@@ -88,7 +88,7 @@ class abDate_Class
         if (str === '')
             return null;
 
-        return moment.utc(str, SPK.$eText.get('SPK:dateTime_Format'))
+        return moment.utc(str, SPK.$eText.get('SPK:formats_DateTime'))
                 .toDate().getTime() / 1000 - (this.utcOffset * 60 * 60);
     }
 
@@ -97,7 +97,7 @@ class abDate_Class
         if (str === '')
             return null;
 
-        var timestamp = moment.utc(str, SPK.$eText.get('SPK:time_Format'))
+        var timestamp = moment.utc(str, SPK.$eText.get('SPK:formats_Time'))
                 .toDate().getTime() / 1000 - (this.utcOffset * 60 * 60);
 
         return timestamp % this.span_Day;
