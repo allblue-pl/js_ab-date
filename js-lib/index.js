@@ -46,9 +46,12 @@ class abDate_Class
         return moment.utc(str, format).toDate().getTime() / 1000;
     }
 
-    getDate(year, month, day)
+    getDate(...args)
     {
-        return new Date(Date.UTC(year, month, day));
+        if (args.length === 0)
+            return new Date();
+            
+        return new Date(Date.UTC.apply(null, args));
     }
 
     getDayOfWeek(time)
