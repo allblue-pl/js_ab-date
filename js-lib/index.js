@@ -91,7 +91,7 @@ class abDate_Class
         if (str === '')
             return null;
 
-        return moment.utc(str, SPK.$eText.get('SPK:formats_DateTime'))
+        return moment.utc(str, this.formats_DateTime)
                 .toDate().getTime() / 1000 - (this.utcOffset * 60 * 60);
     }
 
@@ -100,7 +100,7 @@ class abDate_Class
         if (str === '')
             return null;
 
-        var timestamp = moment.utc(str, SPK.$eText.get('SPK:formats_Time'))
+        var timestamp = moment.utc(str, this.formats_Time)
                 .toDate().getTime() / 1000 - (this.utcOffset * 60 * 60);
 
         return timestamp % this.span_Day;
