@@ -13,9 +13,9 @@ class abDate_Class
         this.span_Hour = 60 * 60;
         this.span_Day = 24 * 60 * 60;
 
-        this.formats_Date = 'd.m.Y';
-        this.formats_DateTime = 'd.m.Y H:i';
-        this.formats_Time = 'H:i';
+        this.formats_Date = 'DD.MM.YYYY';
+        this.formats_DateTime = 'DD.MM.YYYY HH:mm';
+        this.formats_Time = 'HH:ii';
 
         this.utcOffset = 0;
     }
@@ -28,7 +28,7 @@ class abDate_Class
                 .format(format);
     }
 
-    format_Datetime(time, format = null)
+    format_DateTime(time, format = null)
     {
         format = format === null ? this.formats_DateTime : format;
 
@@ -92,7 +92,7 @@ class abDate_Class
             return null;
 
         return moment.utc(str, this.formats_DateTime)
-                .toDate().getTime() / 1000 - (this.utcOffset * 60 * 60);
+                .toDate().getTime() / 1000; // - (this.utcOffset * 60 * 60);
     }
 
     strToTime_Time(str)
