@@ -1,4 +1,8 @@
 {
   "name": "ab-date",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.21"
+  }
 }
