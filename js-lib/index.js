@@ -29,6 +29,11 @@ class abDate_Class
                 .format(format);
     }
 
+    format_Date_UTC(time, format = null)
+    {
+        return this.format_Date(time, format, 0);
+    }
+
     format_DateTime(time, format = null, utcOffset = null)
     {
         format = format === null ? this.formats_DateTime : format;
@@ -37,15 +42,26 @@ class abDate_Class
         return moment.utc(time * 1000).utcOffset(utcOffset).format(format);
     }
 
-    format_Time(str, format = null)
+    format_DateTime_UTC(time, format = null)
+    {
+        return this.format_DateTime(time, format, 0);
+    }
+
+    format_Time(time, format = null, utcOffset = null)
     {
         if (str === '')
             return null;
 
         format = format === null ? this.formats_Time : format;
+        utcOffset = utcOffset === null ? this.utcOffset : utcOffset;
 
         /* UTC because we are interested only in day. */
-        return moment.utc(str, format).toDate().getTime() / 1000;
+        return moment.utc(time * 1000).utcOffset(utc).format(format);
+    }
+
+    format_Time_UTC(time, format = null)
+    {
+        return this.format_Time(time, format, 0);
     }
 
     getDate(time = null)
@@ -58,12 +74,22 @@ class abDate_Class
 
     getDay(time)
     {
+        return this.getDay_UTC(time) - this.utfOffset * this.span_Hour;
+    }
+
+    getDay_UTC(time)
+    {
         time  = Math.floor(time / this.span_Day) * this.span_Day;
 
         return time;
     }
 
     getDayOfWeek(time)
+    {
+        return this.getDayOfWeek(time - this.utcOffset * this.span_Hour);
+    }
+
+    getDayOfWeek_UTC(time)
     {
         let date = new Date(time * 1000);
 
@@ -79,7 +105,7 @@ class abDate_Class
 
     getTime_Rel(date = new Date())
     {
-        return this.getTime(date) + this.utcOffset * this.span_Hour;
+        return this.getTime(date) - this.utcOffset * this.span_Hour;
     }
 
     strToTime_Date(str)
