@@ -15,7 +15,7 @@ class abDate_Class
 
         this.formats_Date = 'DD.MM.YYYY';
         this.formats_DateTime = 'DD.MM.YYYY HH:mm';
-        this.formats_Time = 'HH:ii';
+        this.formats_Time = 'HH:mm';
 
         this.utcOffset = 0;
     }
@@ -55,9 +55,6 @@ class abDate_Class
 
     format_Time(time, format = null, utcOffset = null)
     {
-        if (str === '')
-            return null;
-
         format = format === null ? this.formats_Time : format;
         utcOffset = utcOffset === null ? this.utcOffset : utcOffset;
 
@@ -65,7 +62,7 @@ class abDate_Class
             return '-';
 
         /* UTC because we are interested only in day. */
-        return moment.utc(time * 1000).utcOffset(utc).format(format);
+        return moment.utc(time * 1000).utcOffset(utcOffset).format(format);
     }
 
     format_Time_UTC(time, format = null)
