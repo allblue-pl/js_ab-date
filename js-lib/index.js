@@ -78,13 +78,19 @@ class abDate_Class
         return new Date(time * 1000);
     }
 
-    getDay(time)
+    getDay(time = null)
     {
+        if (time === null)
+            time = this.getTime();
+
         return this.getDay_UTC(time) - this.utcOffset * this.span_Hour;
     }
 
-    getDay_UTC(time)
+    getDay_UTC(time = null)
     {
+        if (time === null)
+            time = this.getTime();
+
         time  = Math.floor(time / this.span_Day) * this.span_Day;
 
         return time;
@@ -92,7 +98,7 @@ class abDate_Class
 
     getDayOfWeek(time)
     {
-        return this.getDayOfWeek(time - this.utcOffset * this.span_Hour);
+        return this.getDayOfWeek_UTC(time - this.utcOffset * this.span_Hour);
     }
 
     getDayOfWeek_UTC(time)
