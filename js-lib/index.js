@@ -7,6 +7,12 @@ const
 class abDate_Class
 {
 
+    get utcOffset_Hours()
+    {
+        return this.utcOffset * this.span_Hour;
+    }
+
+
     constructor()
     {
         this.span_Minute = 60;
@@ -72,6 +78,8 @@ class abDate_Class
 
     getDate(time = null)
     {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
         if (time === null)
             return new Date();
             
@@ -80,32 +88,124 @@ class abDate_Class
 
     getDay(time = null)
     {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
         if (time === null)
             time = this.getTime();
 
-        return this.getDay_UTC(time) - this.utcOffset * this.span_Hour;
+        return this.getDay_UTC(time + this.utcOffset_Hours) - this.utcOffset_Hours;
     }
 
     getDay_UTC(time = null)
     {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
         if (time === null)
             time = this.getTime();
 
-        time  = Math.floor(time / this.span_Day) * this.span_Day;
-
-        return time;
+        // return Math.floor(time / this.span_Day) * this.span_Day;
+        return time - time % this.span_Day;
     }
 
-    getDayOfWeek(time)
+    getDayOfWeek(time = null)
     {
-        return this.getDayOfWeek_UTC(time - this.utcOffset * this.span_Hour);
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = this.getTime();
+        time += this.utcOffset_Hours;
+
+        return this.getDayOfWeek_UTC(time);
     }
 
     getDayOfWeek_UTC(time)
     {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
         let date = new Date(time * 1000);
 
         return date.getUTCDay();
+    }
+
+    getDayNr(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = this.getTime();
+        time += this.utcOffset_Hours;
+
+        return this.getDayNr_UTC(time);
+    }
+
+    getDayNr_UTC(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = this.getTime();
+
+        return this.getDate(time).getUTCDate() - 1;
+    }
+
+    getDaysCountInMonth(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = this.getTime();
+        time += this.utcOffset_Hours;
+
+        return this.getDaysCountInMonth_UTC(time);
+    }
+
+    getDaysCountInMonth_UTC(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = abDate.getTime();
+
+        let year = this.getYearNr_UTC(time);
+        let month = this.getMonthNr_UTC(time);
+
+        return (new Date(year, month + 1, 0)).getDate();
+
+    }
+
+    getMonth(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        return this.getDay(time) - this.getDayNr(time) * this.span_Day;
+    }
+
+    getMonth_UTC(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        return this.getDay_UTC(time) - this.getDayNr_UTC(time) * this.span_Day;
+    }
+
+    getMonthNr(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = this.getTime();
+        time += this.utcOffset_Hours;
+
+        return this.getMonthNr_UTC(time);
+    }
+    
+    getMonthNr_UTC(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = this.getTime();
+
+        return this.getDate(time).getUTCMonth();
     }
 
     getTime(date = new Date())
@@ -115,9 +215,25 @@ class abDate_Class
         return Math.floor(date.getTime() / 1000);
     }
 
-    getTime_Rel(date = new Date())
+    getYearNr(time = null)
     {
-        return this.getTime(date) - this.utcOffset * this.span_Hour;
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = this.getTime();
+        time += this.utcOffset_Hours;
+
+        return this.getYearNr_UTC(time);
+    }
+
+    getYearNr_UTC(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
+
+        if (time === null)
+            time = abDate.getTime();
+
+        return this.getDate(time).getUTCFullYear();
     }
 
     strToTime_Date(str)
