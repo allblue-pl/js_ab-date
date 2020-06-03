@@ -7,8 +7,7 @@ const
 class abDate_Class
 {
 
-    get utcOffset_Hours()
-    {
+    get utcOffset_Time() {
         return this.utcOffset * this.span_Hour;
     }
 
@@ -93,7 +92,7 @@ class abDate_Class
         if (time === null)
             time = this.getTime();
 
-        return this.getDay_UTC(time + this.utcOffset_Hours) - this.utcOffset_Hours;
+        return this.getDay_UTC(time + this.utcOffset_Time) - this.utcOffset_Time;
     }
 
     getDay_UTC(time = null)
@@ -113,7 +112,7 @@ class abDate_Class
 
         if (time === null)
             time = this.getTime();
-        time += this.utcOffset_Hours;
+        time += this.utcOffset_Time;
 
         return this.getDayOfWeek_UTC(time);
     }
@@ -133,7 +132,7 @@ class abDate_Class
 
         if (time === null)
             time = this.getTime();
-        time += this.utcOffset_Hours;
+        time += this.utcOffset_Time;
 
         return this.getDayNr_UTC(time);
     }
@@ -154,7 +153,7 @@ class abDate_Class
 
         if (time === null)
             time = this.getTime();
-        time += this.utcOffset_Hours;
+        time += this.utcOffset_Time;
 
         return this.getDaysCountInMonth_UTC(time);
     }
@@ -193,7 +192,7 @@ class abDate_Class
 
         if (time === null)
             time = this.getTime();
-        time += this.utcOffset_Hours;
+        time += this.utcOffset_Time;
 
         return this.getMonthNr_UTC(time);
     }
@@ -215,13 +214,23 @@ class abDate_Class
         return Math.floor(date.getTime() / 1000);
     }
 
+    getTime_Rel(time = null)
+    {
+        js0.args(arguments, [ 'number', js0.Default ]);
+
+        if (time === null)
+            time = this.getTime();
+
+        return time - this.utcOffset_Time;
+    }
+
     getYearNr(time = null)
     {
         js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
 
         if (time === null)
             time = this.getTime();
-        time += this.utcOffset_Hours;
+        time += this.utcOffset_Time;
 
         return this.getYearNr_UTC(time);
     }
