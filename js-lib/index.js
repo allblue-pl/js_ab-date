@@ -245,6 +245,12 @@ class abDate_Class
         return this.getDate(time).getUTCFullYear();
     }
 
+    strToTime(str, timeFormat)
+    {
+        return moment.utc(str, timeFormat)
+                .toDate().getTime() / 1000;
+    }
+
     strToTime_Date(str)
     {
         if (str === '')
