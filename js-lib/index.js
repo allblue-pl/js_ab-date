@@ -25,6 +25,17 @@ class abDate_Class
         this.utcOffset = 0;
     }
 
+    format(time, format, utcOffset = null)
+    {
+        utcOffset = utcOffset === null ? this.utcOffset : utcOffset;
+
+        if (time === null)
+            return '-';
+
+        return moment.utc(time * 1000).utcOffset(utcOffset)
+                .format(format);
+    }
+
     format_Date(time, format = null, utcOffset = null)
     {
         format = format === null ? this.formats_Date : format;
