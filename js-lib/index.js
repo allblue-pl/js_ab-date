@@ -7,6 +7,10 @@ const
 class abDate_Class
 {
 
+    get utcOffset() {
+        return this._utcOffset;
+    }
+
     get utcOffset_Time() {
         return this.utcOffset * this.span_Hour;
     }
@@ -22,7 +26,7 @@ class abDate_Class
         this.formats_DateTime = 'DD.MM.YYYY HH:mm';
         this.formats_Time = 'HH:mm';
 
-        this.utcOffset = 0;
+        this._utcOffset = 0;
     }
 
     format(time, format, utcOffset = null)
@@ -254,6 +258,13 @@ class abDate_Class
             time = abDate.getTime();
 
         return this.getDate(time).getUTCFullYear();
+    }
+
+    setUTCOffset(utcOffset)
+    {
+        js0.args(arguments, 'int');
+
+        this._utcOffset = utcOffset;
     }
 
     strToTime(str, timeFormat)
