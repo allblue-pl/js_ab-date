@@ -278,7 +278,15 @@ class abDate_Class
         if (str === '')
             return null;
 
-        /* UTC because we are interested only in day. */
+        return moment.utc(str, this.formats_Date)
+                .toDate().getTime() / 1000 - this.utcOffset_Time;
+    }
+
+    strToTime_Date_UTC(str)
+    {
+        if (str === '')
+            return null;
+
         return moment.utc(str, this.formats_Date)
                 .toDate().getTime() / 1000;
     }
@@ -289,7 +297,16 @@ class abDate_Class
             return null;
 
         return moment.utc(str, this.formats_DateTime)
-                .toDate().getTime() / 1000; // - (this.utcOffset * 60 * 60);
+                .toDate().getTime() / 1000 - this.utcOffset_Time;
+    }
+
+    strToTime_DateTime_UTC(str)
+    {
+        if (str === '')
+            return null;
+
+        return moment.utc(str, this.formats_DateTime)
+                .toDate().getTime() / 1000;
     }
 
     strToTime_Time(str)
@@ -298,7 +315,18 @@ class abDate_Class
             return null;
 
         var timestamp = moment.utc(str, this.formats_Time)
-                .toDate().getTime() / 1000 - (this.utcOffset * 60 * 60);
+                .toDate().getTime() / 1000 - this.utcOffset_Time;
+
+        return timestamp % this.span_Day;
+    }
+
+    strToTime_Time_UTC(str)
+    {
+        if (str === '')
+            return null;
+
+        var timestamp = moment.utc(str, this.formats_Time)
+                .toDate().getTime() / 1000;
 
         return timestamp % this.span_Day;
     }
