@@ -270,6 +270,12 @@ class abDate_Class
     strToTime(str, timeFormat)
     {
         return moment.utc(str, timeFormat)
+                .toDate().getTime() / 1000 - this.utcOffset_Time;
+    }
+
+    strToTime_UTC(str, timeFormat)
+    {
+        return moment.utc(str, timeFormat)
                 .toDate().getTime() / 1000;
     }
 
