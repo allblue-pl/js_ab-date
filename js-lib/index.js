@@ -10,6 +10,9 @@ class abDate_Class
     get utcOffset() {
         return this._utcOffset;
     }
+    set utcOffset(value) {
+        throw new Error('Read only property.');
+    }
 
     get utcOffset_Time() {
         return this.utcOffset * this.span_Hour;
