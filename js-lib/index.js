@@ -5,6 +5,15 @@ const
     // moment = require('moment')
 ;
 
+// if (typeof moment === 'undefined') {
+//     console.log('Here?');
+//     const
+//         moment = require('moment')
+//     ;
+//     console.log('A', moment);
+// }
+// console.log('B', moment);
+
 class abDate_Class
 {
 
