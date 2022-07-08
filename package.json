@@ -2,7 +2,7 @@
   "name": "ab-date",
   "version": "0.0.1",
   "dependencies": {
-    "moment": "2.22.*",
+    "moment": "2.29.*",
     "moment-timezone": "0.5.*"
   }
 }
