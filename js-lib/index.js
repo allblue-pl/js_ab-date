@@ -1,8 +1,8 @@
 'use strict';
 
 const
-    js0 = require('js0')
-    // moment = require('moment')
+    js0 = require('js0'),
+    moment = require('moment')
 ;
 
 // if (typeof moment === 'undefined') {
