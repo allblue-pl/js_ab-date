@@ -35,7 +35,7 @@ class abDate_Class
     }
 
     format(time, format, timezone = null) {
-        js0.args(arguments, 'number', 'string', [ 'string', js0.Null, 
+        js0.args(arguments, [ 'number', js0.Null ], 'string', [ 'string', js0.Null, 
                 js0.Default ])
         
         if (time === null)
@@ -46,7 +46,7 @@ class abDate_Class
     }
 
     format_Date(time, timezone = null) {
-        js0.args(arguments, 'number', [ 'string', js0.Null, js0.Default ]);
+        js0.args(arguments, [ 'number', js0.Null ], [ 'string', js0.Null, js0.Default ]);
 
         return this.format(time, this.formats_Date, timezone);
     }
@@ -266,7 +266,7 @@ class abDate_Class
     }
 
     strToTime_Date(str) {
-        s0.args(arguments, 'string');
+        js0.args(arguments, 'string');
 
         if (str === '')
             return null;
@@ -275,6 +275,8 @@ class abDate_Class
     }
 
     strToTime_Date_UTC(str) {
+        js0.args(arguments, 'string');
+
         if (str === '')
             return null;
 
@@ -291,6 +293,8 @@ class abDate_Class
     }
 
     strToTime_DateTime_UTC(str) {
+        js0.args(arguments, 'string');
+
         if (str === '')
             return null;
 
@@ -298,6 +302,8 @@ class abDate_Class
     }
 
     strToTime_Time(str) {
+        js0.args(arguments, 'string');
+
         if (str === '')
             return null;
 
