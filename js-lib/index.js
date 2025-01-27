@@ -215,6 +215,7 @@ class abDate_Class
     getUTCOffset(time = null) {
         js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
 
+        console.log(this._timezone);
         return moment.tz.zone(this._timezone).utcOffset(time === null ?
                 this.getTime() : time) / 60;
     }
