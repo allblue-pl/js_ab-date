@@ -2,7 +2,7 @@
 
 const
     js0 = require('js0'),
-    moment = require('moment')
+    moment = require('moment-timezone')
 ;
 
 // if (typeof moment === 'undefined') {
@@ -31,6 +31,7 @@ class abDate_Class
         this.formats_DateTime = 'DD.MM.YYYY HH:mm';
         this.formats_Time = 'HH:mm';
 
+        this._timezone = null;
         this.setTimezone('UTC');
     }
 
@@ -215,7 +216,6 @@ class abDate_Class
     getUTCOffset(time = null) {
         js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
 
-        console.log(this._timezone);
         return moment.tz.zone(this._timezone).utcOffset(time === null ?
                 this.getTime() : time) / 60;
     }
