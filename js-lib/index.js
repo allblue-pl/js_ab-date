@@ -30,6 +30,7 @@ class abDate_Class
         this.formats_Date = 'DD.MM.YYYY';
         this.formats_DateTime = 'DD.MM.YYYY HH:mm';
         this.formats_Time = 'HH:mm';
+        this.formats_Time_WithSeconds = 'HH:mm:ss';
 
         this._timezone = null;
         this.setTimezone('UTC');
@@ -66,10 +67,11 @@ class abDate_Class
         return this.format_DateTime(time, 'UTC');
     }
 
-    format_Time(time) {
-        js0.args(arguments, 'number');
+    format_Time(time, withSeconds = false) {
+        js0.args(arguments, 'number', [ 'boolean', js0.Default ]);
 
-        return this.format(time, this.formats_Time, 'UTC');
+        return this.format(time, withSeconds ? 
+                this.formats_Time_WithSeconds : this.formats_Time, 'UTC');
     }
 
     format_UTC(time, format) {
@@ -302,13 +304,14 @@ class abDate_Class
         return this.strToTime_UTC(str, this.formats_DateTime);
     }
 
-    strToTime_Time(str) {
-        js0.args(arguments, 'string');
+    strToTime_Time(str, withSeconds = false) {
+        js0.args(arguments, 'string', [ 'boolean', js0.Default ]);
 
         if (str === '')
             return null;
 
-        var timestamp = moment.utc(str, this.formats_Time)
+        var timestamp = moment.utc(str, withSeconds ? 
+                this.formats_Time_WithSeconds : this.formats_Time)
                 .toDate().getTime() / 1000;
 
         return timestamp % this.span_Day;
