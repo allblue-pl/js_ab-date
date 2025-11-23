@@ -67,11 +67,12 @@ class abDate_Class
         return this.format_DateTime(time, 'UTC');
     }
 
-    format_Time(time, withSeconds = false) {
-        js0.args(arguments, 'number', [ 'boolean', js0.Default ]);
+    format_Time(time, withSeconds = false, timezone = null) {
+        js0.args(arguments, 'number', [ 'boolean', js0.Default ],
+                [ 'string', js0.Null, js0.Default ]);
 
         return this.format(time, withSeconds ? 
-                this.formats_Time_WithSeconds : this.formats_Time, 'UTC');
+                this.formats_Time_WithSeconds : this.formats_Time, timezone);
     }
 
     format_UTC(time, format) {
@@ -218,7 +219,7 @@ class abDate_Class
     getUTCOffset(time = null) {
         js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
 
-        return moment.tz.zone(this._timezone).utcOffset(time === null ?
+        return -moment.tz.zone(this._timezone).utcOffset(time === null ?
                 this.getTime() : time) / 60;
     }
 
