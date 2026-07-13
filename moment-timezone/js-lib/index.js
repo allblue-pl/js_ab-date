@@ -1,2 +1,1 @@
-
-module.exports = moment;
+export default moment;

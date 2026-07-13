@@ -1,23 +1,19 @@
-'use strict';
+import moment from "moment-timezone";
 
-const
-    js0 = require('js0'),
-    moment = require('moment-timezone')
-;
+export class abDate_Class {
+    span_Minute: number;
+    span_Hour: number;
+    span_Day: number;
 
-// if (typeof moment === 'undefined') {
-//     console.log('Here?');
-//     const
-//         moment = require('moment')
-//     ;
-//     console.log('A', moment);
-// }
-// console.log('B', moment);
+    formats_Date: string;
+    formats_DateTime: string;
+    formats_Time: string;
+    formats_Time_WithSeconds: string;
 
-class abDate_Class
-{
+    #timezone: string;
 
-    get utcOffset() {
+
+    get utcOffset(): void {
         throw new Error(`'abDate.utcOffset' is deprecated.`);
     }
 
@@ -32,67 +28,50 @@ class abDate_Class
         this.formats_Time = 'HH:mm';
         this.formats_Time_WithSeconds = 'HH:mm:ss';
 
-        this._timezone = null;
-        this.setTimezone('UTC');
+        this.#timezone = "UTC";
     }
 
-    format(time, format, timezone = null) {
-        js0.args(arguments, [ 'number', js0.Null ], 'string', [ 'string', js0.Null, 
-                js0.Default ])
-        
+    format(time: number, format: string, timezone: string|null = null): string {
         if (time === null)
             return '-';
 
         return moment.tz(time * 1000, timezone === null ? 
-            this._timezone : timezone).format(format);
+            this.#timezone : timezone).format(format);
     }
 
-    format_Date(time, timezone = null) {
-        js0.args(arguments, [ 'number', js0.Null ], [ 'string', js0.Null, js0.Default ]);
-
+    format_Date(time: number, timezone: string|null = null): string {
         return this.format(time, this.formats_Date, timezone);
     }
 
-    format_Date_UTC(time) {
+    format_Date_UTC(time: number): string {
         return this.format_Date(time, 'UTC');
     }
 
-    format_DateTime(time, timezone = null) {
-        js0.args(arguments, 'number', [ 'string', js0.Null, js0.Default ]);
-
+    format_DateTime(time: number, timezone: string|null = null): string {
         return this.format(time, this.formats_DateTime, timezone);
     }
 
-    format_DateTime_UTC(time) {
+    format_DateTime_UTC(time: number): string {
         return this.format_DateTime(time, 'UTC');
     }
 
-    format_Time(time, withSeconds = false, timezone = null) {
-        js0.args(arguments, 'number', [ 'boolean', js0.Default ],
-                [ 'string', js0.Null, js0.Default ]);
-
+    format_Time(time: number, withSeconds: boolean = false, timezone: string|null = null): string {
         return this.format(time, withSeconds ? 
                 this.formats_Time_WithSeconds : this.formats_Time, timezone);
     }
 
-    format_UTC(time, format) {
-        js0.args(arguments, 'number', 'string');
-
+    format_UTC(time: number, format: string): string {
         return this.format(time, format, 'UTC');
     }
 
-    getDate(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDate(time: number|null = null): Date {
         if (time === null)
             return new Date();
             
         return new Date(time * 1000);
     }
 
-    getDay(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDay(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
 
@@ -100,9 +79,7 @@ class abDate_Class
                 this.getUTCOffset_Time(time);
     }
 
-    getDay_UTC(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDay_UTC(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
 
@@ -110,46 +87,38 @@ class abDate_Class
         return time - time % this.span_Day;
     }
 
-    getDayOfWeek(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDayOfWeek(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
+
         time += this.getUTCOffset_Time(time);
 
         return this.getDayOfWeek_UTC(time);
     }
 
-    getDayOfWeek_UTC(time) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDayOfWeek_UTC(time: number): number {
         let date = new Date(time * 1000);
 
         return date.getUTCDay();
     }
 
-    getDayNr(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDayNr(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
+
         time += this.getUTCOffset_Time(time);
 
         return this.getDayNr_UTC(time);
     }
 
-    getDayNr_UTC(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDayNr_UTC(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
 
         return this.getDate(time).getUTCDate() - 1;
     }
 
-    getDaysCountInMonth(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDaysCountInMonth(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
         time += this.getUTCOffset_Time(time);
@@ -157,9 +126,7 @@ class abDate_Class
         return this.getDaysCountInMonth_UTC(time);
     }
 
-    getDaysCountInMonth_UTC(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getDaysCountInMonth_UTC(time: number|null = null): number {
         if (time === null)
             time = abDate.getTime();
 
@@ -170,21 +137,15 @@ class abDate_Class
 
     }
 
-    getMonth(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getMonth(time: number|null = null): number {
         return this.getDay(time) - this.getDayNr(time) * this.span_Day;
     }
 
-    getMonth_UTC(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getMonth_UTC(time: number|null = null): number {
         return this.getDay_UTC(time) - this.getDayNr_UTC(time) * this.span_Day;
     }
 
-    getMonthNr(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getMonthNr(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
         time += this.getUTCOffset_Time(time);
@@ -192,46 +153,35 @@ class abDate_Class
         return this.getMonthNr_UTC(time);
     }
     
-    getMonthNr_UTC(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getMonthNr_UTC(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
 
         return this.getDate(time).getUTCMonth();
     }
 
-    getTime(date = new Date()) {
-        js0.args(arguments, [ Date, js0.Default ]);
-
+    getTime(date = new Date()): number {
         return Math.floor(date.getTime() / 1000);
     }
 
-    getTime_Rel(time = null) {
-        js0.args(arguments, [ 'number', js0.Default ]);
-
+    getTime_Rel(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
 
         return time - this.getUTCOffset_Time(time);
     }
 
-    getUTCOffset(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
-        return -moment.tz.zone(this._timezone).utcOffset(time === null ?
+    getUTCOffset(time: number|null = null): number {
+        // @ts-expect-error
+        return -moment.tz.zone(this.#timezone).utcOffset(time === null ?
                 this.getTime() : time) / 60;
     }
 
-    getUTCOffset_Time(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getUTCOffset_Time(time: number|null = null): number {
         return this.getUTCOffset(time) * this.span_Hour;
     }
 
-    getYearNr(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getYearNr(time: number|null = null): number {
         if (time === null)
             time = this.getTime();
         time += this.getUTCOffset_Time(time);
@@ -239,75 +189,58 @@ class abDate_Class
         return this.getYearNr_UTC(time);
     }
 
-    getYearNr_UTC(time = null) {
-        js0.args(arguments, [ 'number', js0.Null, js0.Default ]);
-
+    getYearNr_UTC(time: number|null = null): number {
         if (time === null)
             time = abDate.getTime();
 
         return this.getDate(time).getUTCFullYear();
     }
 
-    setTimezone(timezone) {
+    setTimezone(timezone: string): void {
         if (moment.tz.zone(timezone) === null)
             throw new Error(`Cannot find timezone: ${timezone}.`);
         
-        this._timezone = timezone;
+        this.#timezone = timezone;
     }
 
-    strToTime(str, timeFormat) {
-        js0.args(arguments, 'string', 'string');
-
-        console.log(moment.tz(str, timeFormat, this._timezone).isValid());
-        return moment.tz(str, timeFormat, this._timezone).toDate()
+    strToTime(str: string, timeFormat: string): number|null {
+        return moment.tz(str, timeFormat, this.#timezone).toDate()
                 .getTime() / 1000;
     }
 
-    strToTime_UTC(str, timeFormat) {
-        js0.args(arguments, 'string', 'string');
-
+    strToTime_UTC(str: string, timeFormat: string): number|null {
         return moment.utc(str, timeFormat).toDate().getTime() / 1000;
     }
 
-    strToTime_Date(str) {
-        js0.args(arguments, 'string');
-
+    strToTime_Date(str: string): number|null {
         if (str === '')
             return null;
 
         return this.strToTime(str, this.formats_Date);
     }
 
-    strToTime_Date_UTC(str) {
-        js0.args(arguments, 'string');
-
+    strToTime_Date_UTC(str: string): number|null {
         if (str === '')
             return null;
 
         return this.strToTime_UTC(str, this.formats_Date);
     }
 
-    strToTime_DateTime(str) {
-        js0.args(arguments, 'string');
-
+    strToTime_DateTime(str: string): number|null {
         if (str === '')
             return null;
 
         return this.strToTime(str, this.formats_DateTime);
     }
 
-    strToTime_DateTime_UTC(str) {
-        js0.args(arguments, 'string');
-
+    strToTime_DateTime_UTC(str: string): number|null {
         if (str === '')
             return null;
 
         return this.strToTime_UTC(str, this.formats_DateTime);
     }
 
-    strToTime_Time(str, withSeconds = false) {
-        js0.args(arguments, 'string', [ 'boolean', js0.Default ]);
-
+    strToTime_Time(str: string, withSeconds: boolean = false): number|null {
         if (str === '')
             return null;
 
@@ -319,4 +252,5 @@ class abDate_Class
     }
 
 }
-module.exports = new abDate_Class();
+const abDate = new abDate_Class();
+export default abDate;
