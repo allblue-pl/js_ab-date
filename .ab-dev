@@ -1,5 +1,11 @@
 {
     "abDependencies": {
         "js0": ""
+    },
+    "abTS": {
+        "tsconfig": ".",
+        "libs": [
+            "."
+        ]
     }
 }
