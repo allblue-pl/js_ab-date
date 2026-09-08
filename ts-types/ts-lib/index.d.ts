@@ -15,6 +15,7 @@ export declare class abDate_Class {
     format_DateTime(time: number, timezone?: string | null): string;
     format_DateTime_UTC(time: number): string;
     format_Time(time: number, withSeconds?: boolean, timezone?: string | null): string;
+    format_Time_UTC(time: number, withSeconds?: boolean): string;
     format_UTC(time: number, format: string): string;
     getDate(time?: number | null): Date;
     getDay(time?: number | null): number;

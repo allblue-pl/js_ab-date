@@ -55,9 +55,15 @@ export class abDate_Class {
         return this.format_DateTime(time, 'UTC');
     }
 
-    format_Time(time: number, withSeconds: boolean = false, timezone: string|null = null): string {
+    format_Time(time: number, withSeconds: boolean = false, 
+            timezone: string|null = null): string {
         return this.format(time, withSeconds ? 
                 this.formats_Time_WithSeconds : this.formats_Time, timezone);
+    }
+
+    format_Time_UTC(time: number, withSeconds: boolean = false): string {
+        return this.format(time, withSeconds ? 
+                this.formats_Time_WithSeconds : this.formats_Time, 'UTC');
     }
 
     format_UTC(time: number, format: string): string {
