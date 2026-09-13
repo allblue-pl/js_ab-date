@@ -178,13 +178,14 @@ export class abDate_Class {
     }
 
     getUTCOffset(time: number|null = null): number {
-        // @ts-expect-error
-        return -moment.tz.zone(this.#timezone).utcOffset(time === null ?
-                this.getTime() : time) / 60;
+        return moment.tz(time === null ?
+                this.getTime() * 1000 : time * 1000, 
+                this.#timezone).utcOffset() / 60;
     }
 
     getUTCOffset_Time(time: number|null = null): number {
-        return this.getUTCOffset(time) * this.span_Hour;
+        return this.getUTCOffset(time === null ?
+                this.getTime() : time) * this.span_Hour;
     }
 
     getYearNr(time: number|null = null): number {
