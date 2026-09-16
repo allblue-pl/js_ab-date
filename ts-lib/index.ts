@@ -174,6 +174,13 @@ export class abDate_Class {
         if (time === null)
             time = this.getTime();
 
+        return time + this.getUTCOffset_Time(time);
+    }
+
+    getTime_RelNeg(time: number|null = null): number {
+        if (time === null)
+            time = this.getTime();
+
         return time - this.getUTCOffset_Time(time);
     }
 

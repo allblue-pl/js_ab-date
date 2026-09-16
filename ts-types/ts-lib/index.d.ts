@@ -32,6 +32,7 @@ export declare class abDate_Class {
     getMonthNr_UTC(time?: number | null): number;
     getTime(date?: Date): number;
     getTime_Rel(time?: number | null): number;
+    getTime_RelNeg(time?: number | null): number;
     getUTCOffset(time?: number | null): number;
     getUTCOffset_Time(time?: number | null): number;
     getYearNr(time?: number | null): number;
