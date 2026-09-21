@@ -31,7 +31,7 @@ export class abDate_Class {
         this.#timezone = "UTC";
     }
 
-    format(time: number, format: string, timezone: string|null = null): string {
+    format(time: number|null, format: string, timezone: string|null = null): string {
         if (time === null)
             return '-';
 
@@ -39,34 +39,34 @@ export class abDate_Class {
             this.#timezone : timezone).format(format);
     }
 
-    format_Date(time: number, timezone: string|null = null): string {
+    format_Date(time: number|null, timezone: string|null = null): string {
         return this.format(time, this.formats_Date, timezone);
     }
 
-    format_Date_UTC(time: number): string {
+    format_Date_UTC(time: number|null): string {
         return this.format_Date(time, 'UTC');
     }
 
-    format_DateTime(time: number, timezone: string|null = null): string {
+    format_DateTime(time: number|null, timezone: string|null = null): string {
         return this.format(time, this.formats_DateTime, timezone);
     }
 
-    format_DateTime_UTC(time: number): string {
+    format_DateTime_UTC(time: number|null): string {
         return this.format_DateTime(time, 'UTC');
     }
 
-    format_Time(time: number, withSeconds: boolean = false, 
+    format_Time(time: number|null, withSeconds: boolean = false, 
             timezone: string|null = null): string {
         return this.format(time, withSeconds ? 
                 this.formats_Time_WithSeconds : this.formats_Time, timezone);
     }
 
-    format_Time_UTC(time: number, withSeconds: boolean = false): string {
+    format_Time_UTC(time: number|null, withSeconds: boolean = false): string {
         return this.format(time, withSeconds ? 
                 this.formats_Time_WithSeconds : this.formats_Time, 'UTC');
     }
 
-    format_UTC(time: number, format: string): string {
+    format_UTC(time: number|null, format: string): string {
         return this.format(time, format, 'UTC');
     }
 
