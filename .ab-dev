@@ -1,5 +1,6 @@
 {
     "abDependencies": {
+        "ab-text": "https://github.com/allblue-pl/js_ab-text"
     },
     "abTS": {
         "tsconfig": ".",

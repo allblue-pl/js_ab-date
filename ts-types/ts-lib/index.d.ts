@@ -14,6 +14,10 @@ export declare class abDate_Class {
     format_Date_UTC(time: number | null): string;
     format_DateTime(time: number | null, timezone?: string | null): string;
     format_DateTime_UTC(time: number | null): string;
+    format_DayOfWeek(time: number | null): string;
+    format_DayOfWeek_Short(time: number | null): string;
+    format_DayOfWeek_Short_UTC(time: number | null): string;
+    format_DayOfWeek_UTC(time: number | null): string;
     format_Time(time: number | null, withSeconds?: boolean, timezone?: string | null): string;
     format_Time_UTC(time: number | null, withSeconds?: boolean): string;
     format_UTC(time: number | null, format: string): string;
@@ -21,7 +25,7 @@ export declare class abDate_Class {
     getDay(time?: number | null): number;
     getDay_UTC(time?: number | null): number;
     getDayOfWeek(time?: number | null): number;
-    getDayOfWeek_UTC(time: number): number;
+    getDayOfWeek_UTC(time: number | null): number;
     getDayNr(time?: number | null): number;
     getDayNr_UTC(time?: number | null): number;
     getDaysCountInMonth(time?: number | null): number;
