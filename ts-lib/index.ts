@@ -198,6 +198,24 @@ export class abDate_Class {
         return Math.floor(date.getTime() / 1000);
     }
 
+    getTime_FromNrs(yearNr: number, monthNr: number, dayNr: number): number {
+        monthNr++;
+        dayNr++;
+        
+        let time = this.strToTime_UTC(`${yearNr}-${monthNr}-${dayNr}`, "YYYY-MM-DD");
+
+        return time === null ? 0 : time;
+    }
+
+    getTime_FromNrs_Rel(yearNr: number, monthNr: number, dayNr: number): number {
+        monthNr++;
+        dayNr++;
+
+        let time = this.strToTime(`${yearNr}-${monthNr}-${dayNr}`, "YYYY-MM-DD");
+
+        return time === null ? 0 : time;
+    }
+
     getTime_Rel(time: number|null = null): number {
         if (time === null)
             time = this.getTime();

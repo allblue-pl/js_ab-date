@@ -35,6 +35,8 @@ export declare class abDate_Class {
     getMonthNr(time?: number | null): number;
     getMonthNr_UTC(time?: number | null): number;
     getTime(date?: Date): number;
+    getTime_FromNrs(yearNr: number, monthNr: number, dayNr: number): number;
+    getTime_FromNrs_Rel(yearNr: number, monthNr: number, dayNr: number): number;
     getTime_Rel(time?: number | null): number;
     getTime_RelNeg(time?: number | null): number;
     getUTCOffset(time?: number | null): number;
